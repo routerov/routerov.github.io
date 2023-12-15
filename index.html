@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Secret Santa Generator</title>
+        <title>Générateur de Secret Santa</title>
 
         <script src="vendors/Lodash-3.10.1.js"></script>
         <script src="vendors/Cryptojs.aes-3.1.2.js"></script>
@@ -154,11 +154,31 @@
 
             <div class="part" style="overflow-y: auto">
                 <div class="instructions">
-                    <h1><img src="assets/mistletoe.png" style="vertical-align: middle" /> Secret Santa Generator</h1>
-                    <p>No signup, no email, no bullshit. Just a straightforward <a href="https://github.com/arcanis/secretsanta">open-source</a> tool to help you generate your secret santa pairings. One static page, and that's it.</p>
-                    <p>In the most common case (no exclusion rules, pair each guest with another at random), enter the name of your guests one line at a time. Once done, press "generate" and you're all set: send the generated links to your guests (by mail, chat, whatever floats your boat) and their pairing will be revealed to them (and only them) once they open the link.</p>
-                    <h2>Where does this tool come from?</h2>
-                    <p>I wanted to make a Secret Santa over Facebook without having to reveal to anyone my guests email addresses (so nothing that would require a backend). I also wanted not to know who was paired with me, so I had to find a way to somehow obfuscate the information. And being a developer, well, my first thought was "Let's AES it, for fun and profits!". Classic.</p>
+                    <h1><img src="assets/mistletoe.png" style="vertical-align: middle" /> Générateur de Secret Santa </h1>
+                    <p>Une petite page pour générer des tirages de secret santa .</p>
+                    <p>Dans la plupart des cas (sans règles d'exclusion), entrez le nom des participants, un par ligne. Une fois cela fait, générer les liens et communiquer à chacun des participants le lien révélant leur tirage.</p>
+                    <h2>D'où vient cet outil ?</h2>
+                    <p>C'est une pâle traduction avec quelques adaptation de <a href="https://github.com/arcanis/secretsanta">https://github.com/arcanis/secretsanta</a>. </p>
+		    <h2>Instructions détaillées</h2>
+		    <p> Ajouter un participant sur une ligne<br>
+		      Santa<br>
+		      <br>
+		      Ajout de détails ou de la liste du souhait pour le participant entre parenthèse<br>
+		      Nicolas (l'elfe)<br>
+		      <br>
+		      Empécher une paire de se former avec !<br>
+		      Maël !Aurélie<br>
+		      Aurélie !Maël<br>
+		      <br>
+		      Il est possible d'empêcher plusieurs paires pour un seul participant<br>
+		      Attention: Si il y a trop d'exclusion, ce n'est plus un vrai secret sant!<br>
+		      Rodolphe !Santa !Nicolas (l'elfe)<br>
+		      <br>
+		      Il est aussi possible de tricher (mais ne le faites pas)<br>
+		      Nicolas (le Saint) =Nicolas (l'elfe)<br>
+		      <br>
+		      </p>
+
                 </div>
             </div>
 
@@ -407,8 +427,9 @@
       function protect( e ) {
 
           var name = e.currentTarget.getAttribute( 'data-name' );
+	  var short_name = name.match( /^([^(]+)(?: (\([^)]+\)))?$/ )[1];
 
-          if ( ! confirm( 'Attention ' + name + ' et seulement ' + name + ' doit ouvrir ce lien ! Si tu es bien sur d\'être ' + name + ' tu peux cliquer.\n\n Sinon c\'est de la triche' ) ) {
+          if ( ! confirm( 'Attention ' + short_name + ' et seulement ' + short_name + ' doit ouvrir ce lien ! Si tu es bien sur d\'être ' + short_name + ' tu peux cliquer.\n\n Sinon c\'est de la triche' ) ) {
               e.preventDefault();
           }
 

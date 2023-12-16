@@ -93,7 +93,7 @@ SecretSanta.prototype.generate = function () {
         var name = findNextGifter();
 
         if ( candidatePairings[ name ].length === 0 )
-        throw new Error('Il n\'a pas été possible de trouver un partenaire pour ' + name + ' ! Réessayez, si ça ne fonctionne toujours pas, essayez d\'enlever des exclusions. Désolé !');
+            throw new Error('Il n\'a pas été possible de trouver un partenaire pour ' + name + ' ! Réessayez, si ça ne fonctionne toujours pas, essayez d\'enlever des exclusions. Désolé !');
 
         var pairing = _.sample( candidatePairings[ name ] );
         delete candidatePairings[ name ];
